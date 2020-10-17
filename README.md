@@ -21,10 +21,10 @@ A customisable React Native video player for Android and IOS
 ## Install
 
 ```shell
-npm install git+https://github.com/lichmac/react-native-af-video-player.git
+npm i --save git+https://github.com/lichmac/react-native-af-video-player.git
 ```
 
-Then link
+Then install the dependencies
 
 ```shell
 npm i --save react-native-video
