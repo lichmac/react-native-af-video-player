@@ -2,14 +2,17 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { StyleSheet } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
-import { ToggleIcon, Time, Scrubber } from './'
+import ToggleIcon from './ToggleIcon'
+import Time from './Time'
+import Scrubber from './Scrubber'
+import {isIphoneX} from 'react-native-iphone-x-helper'
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    height: 35,
+    height: isIphoneX() ? 70 : 35,
     alignSelf: 'stretch',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
   }
 })
 
@@ -23,12 +26,14 @@ const ControlBar = (props) => {
     muted,
     fullscreen,
     theme,
-    inlineOnly,
-    hideFullScreenControl
+    inlineOnly
   } = props
 
+  let _style = {...styles.container}
+  _style.height = fullscreen ? (isIphoneX() ? 70 : 50) : 35
+
   return (
-    <LinearGradient colors={['rgba(0,0,0,0)', 'rgba(0,0,0,0.75)']} style={styles.container}>
+    <LinearGradient colors={['rgba(0,0,0,0)', 'rgba(0,0,0,0.75)']} style={_style}>
       <Time time={currentTime} theme={theme.seconds} />
       <Scrubber
         onSeek={pos => onSeek(pos)}
@@ -46,7 +51,7 @@ const ControlBar = (props) => {
         size={20}
       />
       <Time time={duration} theme={theme.duration} />
-      { !inlineOnly || !hideFullScreenControl &&
+      { !inlineOnly &&
       <ToggleIcon
         paddingRight
         onPress={() => props.toggleFS()}
@@ -67,11 +72,10 @@ ControlBar.propTypes = {
   fullscreen: PropTypes.bool.isRequired,
   muted: PropTypes.bool.isRequired,
   inlineOnly: PropTypes.bool.isRequired,
-  hideFullScreenControl: PropTypes.bool.isRequired,
   progress: PropTypes.number.isRequired,
   currentTime: PropTypes.number.isRequired,
   duration: PropTypes.number.isRequired,
   theme: PropTypes.object.isRequired
 }
 
-export { ControlBar }
+export default ControlBar

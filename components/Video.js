@@ -14,7 +14,7 @@ import VideoPlayer from 'react-native-video'
 import KeepAwake from 'react-native-keep-awake'
 import Orientation from 'react-native-orientation'
 import Icons from 'react-native-vector-icons/MaterialIcons'
-import { Controls } from './'
+import Controls from './Controls'
 import { checkSource } from './utils'
 const Win = Dimensions.get('window')
 const backgroundColor = '#000'
@@ -101,7 +101,7 @@ class Video extends Component {
       inlineHeight,
       duration: data.duration
     }, () => {
-      Animated.timing(this.animInline, { toValue: inlineHeight, duration: 200 }).start()
+      Animated.timing(this.animInline, { toValue: inlineHeight, duration: 200, useNativeDriver: false }).start()
       this.props.onPlay(!this.state.paused)
       if (!this.state.paused) {
         KeepAwake.activate()
@@ -242,9 +242,9 @@ class Video extends Component {
           const initialOrient = Orientation.getInitialOrientation()
           const height = orientation !== initialOrient ?
             Win.width : Win.height
-          this.props.onFullScreen(this.state.fullScreen)
-          if (this.props.rotateToFullScreen) Orientation.lockToLandscape()
-          this.animToFullscreen(height)
+            this.props.onFullScreen(this.state.fullScreen)
+            if (this.props.rotateToFullScreen) Orientation.lockToLandscape()
+            this.animToFullscreen(height)
         } else {
           if (this.props.fullScreenOnly) {
             this.setState({ paused: true }, () => this.props.onPlay(!this.state.paused))
@@ -262,16 +262,16 @@ class Video extends Component {
 
   animToFullscreen(height) {
     Animated.parallel([
-      Animated.timing(this.animFullscreen, { toValue: height, duration: 200 }),
-      Animated.timing(this.animInline, { toValue: height, duration: 200 })
+      Animated.timing(this.animFullscreen, { toValue: height, duration: 200, useNativeDriver: false }),
+      Animated.timing(this.animInline, { toValue: height, duration: 200, useNativeDriver: false })
     ]).start()
   }
 
   animToInline(height) {
     const newHeight = height || this.state.inlineHeight
     Animated.parallel([
-      Animated.timing(this.animFullscreen, { toValue: newHeight, duration: 100 }),
-      Animated.timing(this.animInline, { toValue: this.state.inlineHeight, duration: 100 })
+      Animated.timing(this.animFullscreen, { toValue: newHeight, duration: 100, useNativeDriver: false }),
+      Animated.timing(this.animInline, { toValue: this.state.inlineHeight, duration: 100, useNativeDriver: false })
     ]).start()
   }
 
@@ -352,9 +352,7 @@ class Video extends Component {
       onMorePress,
       inlineOnly,
       playInBackground,
-      playWhenInactive,
-      controlDuration,
-      hideFullScreenControl
+      playWhenInactive
     } = this.props
 
     const inline = {
@@ -423,8 +421,6 @@ class Video extends Component {
           onMorePress={() => onMorePress()}
           theme={setTheme}
           inlineOnly={inlineOnly}
-          controlDuration={controlDuration}
-          hideFullScreenControl={hideFullScreenControl}
         />
       </Animated.View>
     )
@@ -439,7 +435,8 @@ class Video extends Component {
 Video.propTypes = {
   url: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.number
+    PropTypes.number,
+    PropTypes.object
   ]).isRequired,
   placeholder: PropTypes.oneOfType([
     PropTypes.string,
@@ -456,7 +453,6 @@ Video.propTypes = {
   loop: PropTypes.bool,
   autoPlay: PropTypes.bool,
   inlineOnly: PropTypes.bool,
-  hideFullScreenControl: PropTypes.bool,
   fullScreenOnly: PropTypes.bool,
   playInBackground: PropTypes.bool,
   playWhenInactive: PropTypes.bool,
@@ -476,8 +472,7 @@ Video.propTypes = {
   logo: PropTypes.string,
   title: PropTypes.string,
   theme: PropTypes.object,
-  resizeMode: PropTypes.string,
-  controlDuration: PropTypes.number,
+  resizeMode: PropTypes.string
 }
 
 Video.defaultProps = {
@@ -506,8 +501,7 @@ Video.defaultProps = {
   logo: undefined,
   title: '',
   theme: defaultTheme,
-  resizeMode: 'contain',
-  controlDuration: 3,
+  resizeMode: 'contain'
 }
 
 export default Video

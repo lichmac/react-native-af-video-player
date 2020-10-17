@@ -38,4 +38,4 @@ PlayButton.propTypes = {
   theme: PropTypes.string.isRequired
 }
 
-export { PlayButton }
+export default PlayButton

@@ -1,4 +1,4 @@
-import Video from './Video'
+// import Video from './Video'
 export * from './PlayButton'
 export * from './Controls'
 export * from './ControlBar'
@@ -11,4 +11,4 @@ export * from './ProgressBar'
 export * from './ScrollView'
 export * from './Container'
 
-export default Video
+// export default Video

@@ -98,4 +98,4 @@ ScrollView.defaultProps = {
   bounces: false
 }
 
-export { ScrollView }
+export default ScrollView

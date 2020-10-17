@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 
 import LinearGradient from 'react-native-linear-gradient'
-import { ToggleIcon } from './'
+import ToggleIcon from './ToggleIcon'
 import { checkSource } from './utils'
 
 const backgroundColor = 'transparent'
@@ -74,11 +74,11 @@ const TopBar = (props) => {
 }
 
 TopBar.propTypes = {
-  title: PropTypes.string.isRequired,
-  logo: PropTypes.string.isRequired,
-  more: PropTypes.bool.isRequired,
-  onMorePress: PropTypes.func.isRequired,
-  theme: PropTypes.object.isRequired
+  title: PropTypes.string,
+  logo: PropTypes.string,
+  more: PropTypes.bool,
+  onMorePress: PropTypes.func,
+  theme: PropTypes.object
 }
 
-export { TopBar }
+export default TopBar

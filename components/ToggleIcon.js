@@ -64,4 +64,4 @@ ToggleIcon.defaultProps = {
   paddingLeft: false
 }
 
-export { ToggleIcon }
+export default ToggleIcon

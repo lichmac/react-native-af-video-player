@@ -43,4 +43,4 @@ Time.propTypes = {
   theme: PropTypes.string.isRequired
 }
 
-export { Time }
+export default Time
