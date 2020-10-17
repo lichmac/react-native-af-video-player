@@ -21,17 +21,18 @@ A customisable React Native video player for Android and IOS
 ## Install
 
 ```shell
-npm i -S react-native-af-video-player
+npm install git+https://github.com/lichmac/react-native-af-video-player.git
 ```
 
 Then link
 
 ```shell
-react-native link react-native-video
-react-native link react-native-keep-awake
-react-native link react-native-vector-icons
-react-native link react-native-orientation
-react-native link react-native-linear-gradient
+npm i --save react-native-video
+npm i --save react-native-keep-awake
+npm i --save react-native-vector-icons
+npm i --save react-native-orientation
+npm i --save react-native-linear-gradient
+npm i --save react-native-iphone-x-helper
 ```
 
 ## Simple Usage
