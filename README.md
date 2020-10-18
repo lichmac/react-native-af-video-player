@@ -33,6 +33,7 @@ npm i --save react-native-vector-icons
 npm i --save react-native-orientation
 npm i --save react-native-linear-gradient
 npm i --save react-native-iphone-x-helper
+npm i --save @react-native-community/slider
 ```
 
 ## Simple Usage
